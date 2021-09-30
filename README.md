@@ -143,6 +143,26 @@ This means is equals to
 config.add_route("foo_route", pattern="/foo")
 ```
 
+### Customizing Swagger UI
+
+`pyramid_openapi3` bootstraps [Swagger API explorer via a HTML template](https://github.com/Pylons/pyramid_openapi3/blob/master/pyramid_openapi3/static/index.html).
+You can override this with your own `index.html` template and change the elements of the API explorer, like the logo image.
+
+You can give a custom HTML template
+```python
+# Look up our custom supplied index.html from the Python package
+# when the Pyramid web server is being configured
+index_html = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "spec", "index.html"))
+
+# Pass custom index.html to Swagger explorer
+config.pyramid_openapi3_add_explorer(route='/explorer/', template=index_html)
+```
+
+The HTML template itself initializes Swagger UI and can pass custom elements and templates.
+Simple modifications, like logo overrides, can be done with CSS. [See an example here](https://github.com/tradingstrategy-ai/spec/blob/main/index.html). 
+
+
+
 ## Demo / Examples
 
 There are three examples provided with this package:
